@@ -6,15 +6,18 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 import styled from 'styled-components/native'
 
+import {animated, useSpring} from 'react-spring'
+
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Movies from '../components/Movies'
 
 const api = [
-	require('../assets/movie1.jpg'),
-	require('../assets/movie2.jpg'),
-	require('../assets/movie3.jpg'),
-	require('../assets/movie4.jpg')
+	require('../assets/movies/movie1.jpg'),
+	require('../assets/movies/movie2.jpg'),
+	require('../assets/movies/movie3.jpg'),
+	require('../assets/movies/movie4.jpg'),
+	require('../assets/movies/movie5.jpg'),
 ]
 
 const Container = styled.ScrollView`
@@ -31,7 +34,11 @@ const Gradient = styled(LinearGradient)`
 	height: 100%;
 `
 
+const AnimatedPoster = animated(Poster);
+
 const Home = () => {
+	const propsPoster = useSpring({config: { duration: 3000 }, to: {opacity: 1}, from: {opacity: 0}});
+
 	return (
 		<>
 			<StatusBar
@@ -40,7 +47,7 @@ const Home = () => {
 				barStyle='light-content'
 			/>
 			<Container>
-				<Poster source={require('../assets/poster.jpg')}>
+				<AnimatedPoster style={propsPoster} source={require('../assets/poster.jpg')}>
 					<Gradient
 						locations={[0, 0.2, 0.6, 0.93]}
 						colors={[
@@ -52,9 +59,9 @@ const Home = () => {
 						<Header />
 						<Hero />
 					</Gradient>
-				</Poster>
-				<Movies label='Recomendados' item={api} />
-				<Movies label='Top 10' item={api} />
+				</AnimatedPoster>
+				<Movies label='Recomendados' movieList={api} />
+				<Movies label='Top 10' movieList={api} />
 			</Container>
 		</>
 	)
