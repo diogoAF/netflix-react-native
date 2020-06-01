@@ -4,11 +4,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-
-import Home from './screen/Home';
 import ProfileToEdit from './screen/ProfileToEdit';
 import ChooseIcon from './screen/ChooseIcon';
-import Camera from './screen/Camera';
+import CameraController from './screen/CameraController';
 import Tabs from './routes/Tabs';
 
 const App = () => {
@@ -18,7 +16,7 @@ const App = () => {
 				<Stack.Screen name="Tabs" component={Tabs} options={{headerShown: false}}/>
 				<Stack.Screen name="ProfileToEdit" component={ProfileToEdit} options={{headerShown: false}}/>
 				<Stack.Screen name="ChooseIcon" component={ChooseIcon} options={{headerShown: false}}/>
-				<Stack.Screen name="Camera" component={Camera} options={{headerShown: false}}/>
+				<Stack.Screen name="CameraController" component={CameraController} options={{headerShown: false}}/>
 			</Stack.Navigator>
 		</NavigationContainer>
 		);

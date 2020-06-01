@@ -70,7 +70,7 @@ const replaceAvatarsWithImage = (props, profilesAvailables) => {
     profilesAvailables.map((item) => {
       if (item.name === props.route.params.name) {
         if (props.route?.params?.image) {
-          item.uri = props.route.params.image; //FOTO DA CAMERA
+          item.uri = props.route.params.image.uri; //FOTO DA CAMERA
           item.icon = null;
         }
         if (props.route?.params?.icon) {
