@@ -8,6 +8,7 @@ import ProfileToEdit from './screen/ProfileToEdit';
 import ChooseIcon from './screen/ChooseIcon';
 import CameraController from './screen/CameraController';
 import Tabs from './routes/Tabs';
+import {GetLocation} from './services/movieFilter';
 
 const App = () => {
 	return (
