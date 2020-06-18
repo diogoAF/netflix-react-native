@@ -54,7 +54,7 @@ const Movies = ({label, movieList}) => {
                     index === pressing.index ? {transform: [translate]} : null
                   }
                   resizeMode="cover"
-                  source={movie}
+                  source={{uri: movie.Poster}}
                 />
               </TouchableWithoutFeedback>
             </MovieCard>

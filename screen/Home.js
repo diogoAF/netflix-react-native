@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 import { StatusBar, Dimensions } from 'react-native'
 
@@ -7,6 +7,8 @@ import { LinearGradient } from 'expo-linear-gradient'
 import styled from 'styled-components/native'
 
 import {animated, useSpring} from 'react-spring'
+
+import {GetLocation, FilterByCountry} from '../services/movieFilter';
 
 import Header from '../components/Header'
 import Hero from '../components/Hero'
@@ -39,6 +41,26 @@ const AnimatedPoster = animated(Poster);
 const Home = () => {
 	const propsPoster = useSpring({config: { duration: 3000 }, to: {opacity: 1}, from: {opacity: 0}});
 
+	const [movies, setMovies] = useState([]);
+	const [nationalMovies, setNationalMovies] = useState([]);
+
+	useEffect(async () => {
+		const moviesJson = require('../assets/movies.json');
+		const position = await GetLocation();
+		const nationalCountries = await FilterByCountry(moviesJson, position);
+
+		setNationalMovies(nationalCountries);
+		const nationalCountriesTitles = nationalCountries.map(
+			(item, index) => item.Title
+		);
+		const moviesInternationals = moviesJson.filter((item, index) => {
+			return !nationalCountriesTitles.includes(item.Title);
+		});
+		setMovies(moviesInternationals);
+		//loadingMovies();
+		//Aula 04/06 => 02:19
+	},[]);
+
 	return (
 		<>
 			<StatusBar
@@ -60,8 +82,8 @@ const Home = () => {
 						<Hero />
 					</Gradient>
 				</AnimatedPoster>
-				<Movies label='Recomendados' movieList={api} />
-				<Movies label='Top 10' movieList={api} />
+				<Movies label='Movies' movieList={movies} />
+				<Movies label='Nationals' movieList={nationalMovies} />
 			</Container>
 		</>
 	)
