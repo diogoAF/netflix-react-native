@@ -3,11 +3,14 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest"
   },
   "dependencies": {
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "0.1.6",
+    "@react-native-firebase/app": "^7.2.1",
+    "@react-native-firebase/messaging": "^7.1.6",
     "@react-navigation/bottom-tabs": "^5.5.1",
     "@react-navigation/native": "^5.5.0",
     "@react-navigation/stack": "^5.4.1",
@@ -33,7 +36,16 @@
     "babel-jest": "~25.2.6",
     "babel-preset-expo": "^8.1.0",
     "jest": "~25.2.6",
+    "jest-expo": "31.0.0",
     "react-test-renderer": "~16.9.0"
+  },
+  "jest": {
+    "coverageDirectory": "__tests__/coverage/",
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ],
+    "verbose": true
   },
   "private": true
 }
